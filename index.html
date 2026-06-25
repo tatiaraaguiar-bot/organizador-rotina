@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organizador da Rotina</title>
+
+<style>
+body{
+font-family: Arial;
+background: linear-gradient(135deg,#3498db,#2ecc71);
+padding:20px;
+}
+
+.container{
+max-width:650px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+
+h1{
+text-align:center;
+color:#2c3e50;
+}
+
+label{
+display:block;
+margin-top:10px;
+font-weight:bold;
+}
+
+input{
+width:100%;
+padding:10px;
+margin-top:5px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:20px;
+background:#2980b9;
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+}
+
+button:hover{
+background:#1f5f8b;
+}
+
+#resultado{
+margin-top:20px;
+padding:15px;
+background:#ecf0f1;
+border-radius:10px;
+display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📅 Organizador da Rotina</h1>
+
+<label>Nome</label>
+<input type="text" id="nome">
+
+<label>Trabalho (horas)</label>
+<input type="number" id="trabalho" min="0" max="24">
+
+<label>Estudo (horas)</label>
+<input type="number" id="estudo" min="0" max="24">
+
+<label>Tempo Livre (horas)</label>
+<input type="number" id="livre" min="0" max="24">
+
+<label>Sono (horas)</label>
+<input type="number" id="sono" min="0" max="24">
+
+<button onclick="calcular()">Analisar Rotina</button>
+
+<div id="resultado"></div>
+
+</div>
+
+<script>
+
+function calcular(){
+
+let nome = document.getElementById("nome").value;
+let trabalho = Number(document.getElementById("trabalho").value);
+let estudo = Number(document.getElementById("estudo").value);
+let livre = Number(document.getElementById("livre").value);
+let sono = Number(document.getElementById("sono").value);
+
+if(nome === ""){
+alert("Digite seu nome!");
+return;
+}
+
+let total = trabalho + estudo + livre + sono;
+
+let mensagens = [
+"Organização é o primeiro passo para o sucesso.",
+"Pequenos estudos diários fazem grande diferença.",
+"Descansar também faz parte da produtividade.",
+"Você está construindo seu futuro!"
+];
+
+let msg = mensagens[Math.floor(Math.random()*mensagens.length)];
+
+let resultado = "<h2>Olá, " + nome + "!</h2>";
+
+resultado += "<p><b>Resumo da rotina:</b></p>";
+resultado += "Trabalho: " + trabalho + "h<br>";
+resultado += "Estudo: " + estudo + "h<br>";
+resultado += "Livre: " + livre + "h<br>";
+resultado += "Sono: " + sono + "h<br><br>";
+
+if(livre >= 2){
+resultado += "✅ Você tem tempo para descanso.<br>";
+}else{
+resultado += "⚠️ Tente reservar mais tempo livre.<br>";
+}
+
+if(estudo < 2){
+resultado += "📚 Sugestão: estudar mais.<br>";
+}else{
+resultado += "🎓 Bom tempo de estudo!<br>";
+}
+
+if(sono < 6){
+resultado += "😴 Durma mais para melhorar sua saúde.<br>";
+}else{
+resultado += "💚 Sono adequado.<br>";
+}
+
+/* 🔴 CORREÇÃO PRINCIPAL AQUI */
+if(total > 24){
+resultado += "<br>❌ Erro: a soma ultrapassa 24 horas do dia.";
+}else{
+resultado += "<br>✅ Rotina válida!";
+}
+
+resultado += "<br><br><i>" + msg + "</i>";
+
+document.getElementById("resultado").style.display = "block";
+document.getElementById("resultado").innerHTML = resultado;
+
+}
+
+</script>
+
+</body>
+</html>
